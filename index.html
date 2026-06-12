@@ -233,7 +233,66 @@
             border-top: 1px solid #333;
         }
 
-    </style>
+    </style> 
+    /* Estilos para el Nudo Interactivo */
+#rope-container {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 120px;
+    height: 120px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* No interfiere con los clicks */
+}
+
+#knot-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(5px 5px 0px var(--negro));
+}
+
+#knot-path {
+    fill: none;
+    stroke: var(--verde-lima);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: all 0.1s ease-out;
+}
+
+#knot-cross {
+    fill: none;
+    stroke: var(--verde-lima);
+    stroke-width: 5;
+    opacity: 0; /* Aparece solo al final */
+    transition: all 0.1s ease-out;
+}
+
+#tension-label {
+    background: var(--negro);
+    color: var(--verde-lima);
+    font-size: 10px;
+    padding: 2px 5px;
+    margin-top: 5px;
+    font-family: 'JetBrains Mono';
+    border: 1px solid var(--verde-lima);
+}
+
+/* El cursor personalizado de soga (Opcional) */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: var(--verde-lima);
+    border: 2px solid var(--negro);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transition: transform 0.1s ease-out;
+}
 </head>
 <body>
 
