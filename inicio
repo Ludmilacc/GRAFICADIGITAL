@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUDO STUDIO | Infraestructura Portátil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-klein: #002FA7;
+            --verde-lima: #CCFF00;
+            --negro: #0a0a0a;
+            --blanco: #ffffff;
+            --border-heavy: 4px solid var(--negro);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--azul-klein);
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--blanco);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Archivo Black', sans-serif;
+            text-transform: uppercase;
+        }
+
+        /* --- UI COMPONENTS --- */
+
+        .sticker {
+            background: var(--verde-lima);
+            color: var(--negro);
+            padding: 10px 20px;
+            font-weight: bold;
+            display: inline-block;
+            border: 2px solid var(--negro);
+            transform: rotate(-5deg);
+            position: absolute;
+            z-index: 10;
+            box-shadow: 5px 5px 0px var(--negro);
+        }
+
+        .btn-arcade {
+            background: var(--verde-lima);
+            color: var(--negro);
+            border: var(--border-heavy);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.2s;
+            box-shadow: 8px 8px 0px var(--negro);
+        }
+
+        .btn-arcade:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px var(--negro);
+            background: var(--blanco);
+        }
+
+        /* --- NAVIGATION --- */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--negro);
+            border-bottom: var(--border-heavy);
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 40px;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: var(--verde-lima);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* --- SECTION: HOME --- */
+
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .marquee {
+            width: 100vw;
+            overflow: hidden;
+            background: var(--verde-lima);
+            color: var(--negro);
+            border-y: var(--border-heavy);
+            padding: 20px 0;
+            position: absolute;
+            bottom: 10%;
+            transform: rotate(-2deg);
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 10s linear infinite;
+            font-size: 4rem;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 15vw, 12rem);
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-shadow: 10px 10px 0px var(--negro);
+        }
+
+        /* --- SECTION: MANIFIESTO --- */
+
+        #manifiesto {
+            background: var(--blanco);
+            color: var(--negro);
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            border-top: var(--border-heavy);
+        }
+
+        .manifiesto-texto {
+            grid-column: 1 / 8;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .manifiesto-aside {
+            grid-column: 9 / 13;
+            border-left: var(--border-heavy);
+            padding-left: 20px;
+        }
+
+        /* --- SECTION: TIENDA (MERCADO CORDÓN) --- */
+
+        .section-store {
+            padding: 80px 5%;
+            background: var(--azul-klein);
+        }
+
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .card {
+            border: var(--border-heavy);
+            background: var(--blanco);
+            color: var(--negro);
+            padding: 20px;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            background: #eee; /* Placeholder */
+            border: 2px solid var(--negro);
+            object-fit: cover;
+        }
+
+        .card h3 { margin: 15px 0 5px 0; }
+
+        .price-tag {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--verde-lima);
+            padding: 5px;
+            border: 2px solid var(--negro);
+            font-weight: bold;
+        }
+
+        /* --- SECTION: CONECTAR --- */
+
+        #conectar {
+            background: var(--negro);
+            padding: 100px 10%;
+            color: var(--verde-lima);
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: left;
+            border: 2px solid var(--verde-lima);
+            padding: 30px;
+            box-shadow: 10px 10px 0px var(--verde-lima);
+        }
+
+        label { display: block; margin-bottom: 10px; font-size: 0.8rem; }
+
+        input, textarea {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--verde-lima);
+            padding: 10px;
+            color: var(--verde-lima);
+            font-family: 'JetBrains Mono';
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.7rem;
+            background: var(--negro);
+            border-top: 1px solid #333;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div>NUDO STUDIO®</div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#home">[ INICIO ]</a>
+            <a href="#manifiesto">[ MANIFIESTO ]</a>
+            <a href="#mercado">[ MERCADO ]</a>
+            <a href="#conectar">[ CONECTAR ]</a>
+        </div>
+    </nav>
+
+    <div class="sticker" style="top: 120px; left: 50px;">EXPERIMENTAL UNIT</div>
+
+    <!-- 1. HOME -->
+    <section id="home">
+        <h1 class="hero-title">DISEÑO BAJO<br>TENSIÓN.</h1>
+        <p style="max-width: 400px; margin-bottom: 30px;">Upcycling de alto impacto. 100% Cordón Industrial y flexibilidad extrema.</p>
+        <a href="#mercado" class="btn-arcade">ENTRAR AL SISTEMA →</a>
+        
+        <div class="marquee">
+            <div class="marquee-content">
+                &nbsp; NO ES MODA, ES INFRAESTRUCTURA PORTÁTIL // FLEXIBILIDAD O MUERTE // UPCYCLING VISCERAL // NO ES MODA, ES INFRAESTRUCTURA PORTÁTIL // 
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. MANIFIESTO -->
+    <section id="manifiesto">
+        <div class="manifiesto-texto">
+            <h2 style="margin-bottom: 30px;">NUESTRA OBSESIÓN: EL NUDO.</h2>
+            <p>Nacimos del excedente, de la fricción y de la carga pesada. En NUDO STUDIO no cosemos: ensamblamos tensiones. El cordón industrial no es un residuo, es un vector de flexibilidad infinita.</p>
+            <br>
+            <p>Tomamos la rigidez de la industria y la deformamos hasta que se adapta a tu cuerpo. Creemos en el objeto que no pide permiso.</p>
+        </div>
+        <div class="manifiesto-aside">
+            <p style="font-size: 0.8rem;">ESTADO DEL SISTEMA: OPERATIVO<br>ORIGEN: 100% RECUPERADO<br>TENSIÓN MÁXIMA: 100KG</p>
+        </div>
+    </section>
+
+    <!-- 3. MERCADO CORDÓN & 4. LÍNEA VOLUMEN -->
+    <section id="mercado" class="section-store">
+        <h2 style="font-size: 3rem;">LÍNEA VOLUMEN_</h2>
+        <p>[ CARTERAS RÍGIDAS / ESTRUCTURAS PESADAS ]</p>
+        
+        <div class="grid-productos">
+            <!-- Producto 1 -->
+            <div class="card">
+                <div class="price-tag">$12.000</div>
+                <img src="https://via.placeholder.com/400x400/002FA7/CCFF00?text=VORTEX-72" alt="Vortex-72">
+                <h3>MODELO: VORTEX-72</h3>
+                <p>Estructura de núcleo rígido envuelta en 72 metros de cordón náutico. Un búnker para tus pertenencias.</p>
+            </div>
+            <!-- Producto 2 -->
+            <div class="card">
+                <div class="price-tag">$15.500</div>
+                <img src="https://via.placeholder.com/400x400/002FA7/CCFF00?text=BLOCK-BAG" alt="Block-Bag">
+                <h3>BLOCK-BAG 01</h3>
+                <p>Geometría brutalista. Tensión máxima en los puntos de apoyo. No pierde la forma, ni aunque la pises.</p>
+            </div>
+            <!-- Producto 3 -->
+            <div class="card">
+                <div class="price-tag">$11.200</div>
+                <img src="https://via.placeholder.com/400x400/002FA7/CCFF00?text=CARGO-KNOT" alt="Cargo-Knot">
+                <h3>CARGO-KNOT SHELL</h3>
+                <p>Inspirada en el amarre de puerto. Capacidad de expansión controlada por nudos de seguridad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LÍNEA KIT -->
+    <section class="section-store" style="background: var(--verde-lima); color: var(--negro);">
+        <h2 style="font-size: 3rem;">LÍNEA KIT_</h2>
+        <p style="color: var(--azul-klein);">[ ACCESORIOS Y CORREAS TÉCNICAS ]</p>
+        
+        <div class="grid-productos">
+            <div class="card" style="background: var(--negro); color: var(--blanco);">
+                <img src="https://via.placeholder.com/400x400/CCFF00/002FA7?text=EXTENSOR" alt="Extensor">
+                <h3>EXTENSOR MODULAR LIMA</h3>
+                <p>Correa técnica multitarea. Compatible con cualquier sistema de carga. 100% Polipropileno virgen recuperado.</p>
+            </div>
+            <div class="card" style="background: var(--negro); color: var(--blanco);">
+                <img src="https://via.placeholder.com/400x400/CCFF00/002FA7?text=GRIP-LINK" alt="Grip-Link">
+                <h3>GRIP-LINK 00</h3>
+                <p>Llavero de nudo infinito. Imposible de perder, difícil de ignorar. El peso justo del diseño industrial.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONECTAR -->
+    <section id="conectar">
+        <h2>CONECTAR_CON_SISTEMA</h2>
+        <p>¿DUDAS? ¿ERRORES? ¿COLABORACIONES?</p>
+        
+        <form>
+            <label>INGRESE IDENTIDAD (USER):</label>
+            <input type="text" placeholder="Ej: NEOMANTE_01">
+            
+            <label>PUNTO DE CONTACTO (EMAIL):</label>
+            <input type="email" placeholder="user@network.com">
+            
+            <label>TRANSMITIR REQUERIMIENTO / QUEJA / AMOR:</label>
+            <textarea rows="4" placeholder="Escribí aquí... no seas tímido/a."></textarea>
+            
+            <button type="button" class="btn-arcade" style="width: 100%;">[ EJECUTAR TRANSMISIÓN ]</button>
+        </form>
+    </section>
+
+    <footer>
+        NUDO STUDIO © 2024 - PROTOCOLO DE DISEÑO INDEPENDIENTE - HECHO CON CUERDA.
+    </footer>
+
+</body>
+</html>
