@@ -32,6 +32,53 @@
             font-family: 'Archivo Black', sans-serif;
             text-transform: uppercase;
         }
+        <script>
+    const knotPath = document.getElementById('knot-path');
+    const knotCross = document.getElementById('knot-cross');
+    const tensionLabel = document.getElementById('tension-label');
+    const knotSvg = document.getElementById('knot-svg');
+
+    window.addEventListener('scroll', () => {
+        // 1. Calcular el porcentaje de scroll
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+
+        // 2. Modificar el radio del círculo (se achica al bajar)
+        // Radio inicial 40, radio final 10
+        const newRadius = 40 - (scrollPercent * 0.3); 
+        knotPath.setAttribute('r', Math.max(newRadius, 8));
+
+        // 3. Aumentar el grosor de la soga para simular presión
+        const newStroke = 8 + (scrollPercent * 0.1);
+        knotPath.style.strokeWidth = newStroke;
+
+        // 4. Rotar el nudo según el scroll
+        knotSvg.style.transform = `rotate(${scrollPercent * 3.6}deg)`;
+
+        // 5. Mostrar la cruz central cuando hay mucha tensión (> 80%)
+        if (scrollPercent > 80) {
+            knotCross.style.opacity = "1";
+            knotPath.style.stroke = "#ffffff"; // Cambia a blanco en tensión máxima
+        } else {
+            knotCross.style.opacity = "0";
+            knotPath.style.stroke = "var(--verde-lima)";
+        }
+
+        // 6. Actualizar etiqueta de texto
+        tensionLabel.innerText = `TENSIÓN: ${Math.round(scrollPercent)}%`;
+    });
+
+    // Cursor que sigue al mouse con lag suave (Efecto soga)
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+    });
+</script>
 
         /* --- UI COMPONENTS --- */
 
